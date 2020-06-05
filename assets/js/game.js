@@ -47,45 +47,45 @@ var fight = function(enemy){
       //if true, leave fight by breaking loop
       break;
     }
-  }
-   
-  // remove enemy's health by subtracting the randomly set amount in the damage variable
-  var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-  enemy.health = Math.max(0, enemy.health - damage);
-  console.log(playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining.");
-
-  // check enemy's health
-  if (enemy.health <= 0){
-    window.alert(enemy.name + " has died!");
-
-    // award player money for winning
-    playerInfo.money = playerInfo.money + 20;
-
-    // leave while() loop since enemy is dead
-    break;
-  }
-  else{
-    window.alert(enemy.name + " still has " + enemy.health + " health left.");
-  }
-
-  // remove players's health by subtracting the amount set in the enemy.attack variable
-  var damage = randomNumber(enemy.attack - 3, enemy.attack);
-  playerInfo.health = Math.max(0, playerInfo.health - damage);
-  console.log(enemy.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining.");
-
-  // check player's health
-  if (playerInfo.health <= 0){
-    window.alert(playerInfo.name + " has died!");
-    // leave while() loop if player is dead
-    break;
-  }
-  else{
-    window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
-  }
   
+   
+    // remove enemy's health by subtracting the randomly set amount in the damage variable
+    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+    enemy.health = Math.max(0, enemy.health - damage);
+    console.log(playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining.");
+
+    // check enemy's health
+    if (enemy.health <= 0){
+      window.alert(enemy.name + " has died!");
+
+      // award player money for winning
+      playerInfo.money = playerInfo.money + 20;
+
+      // leave while() loop since enemy is dead
+      break;
+    }
+    else{
+      window.alert(enemy.name + " still has " + enemy.health + " health left.");
+    }
+
+    // remove players's health by subtracting the amount set in the enemy.attack variable
+    var damage = randomNumber(enemy.attack - 3, enemy.attack);
+    playerInfo.health = Math.max(0, playerInfo.health - damage);
+    console.log(enemy.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining.");
+
+    // check player's health
+    if (playerInfo.health <= 0){
+      window.alert(playerInfo.name + " has died!");
+      // leave while() loop if player is dead
+      break;
+    }
+    else{
+      window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
+    }
+  }  
 };
 
-//function containing endgame states and actions
+  //function containing endgame states and actions
 var endGame = function(){
   //if player is still alive, player wins!
   if (playerInfo.health > 0){
@@ -103,23 +103,25 @@ var endGame = function(){
   }
   else{
       window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+  
   }
 }
 //function containing shop functions
 var shop = function(){
-  var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop?");
-  shopOptionPrompt = shopOptionPrompt.toLowerCase();
+
+  var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Type 1 to REFILL health, 2 to UPGRADE attack, or 3 to LEAVE the shop");
+  shopOptionPrompt = parseInt(shopOptionPrompt);
   switch (shopOptionPrompt){
    
-    case "refill":
+    case 1:
       playerInfo.refillHealth();
       break;
 
-    case "upgrade":
+    case 2:
       playerInfo.upgradeAttack();    
       break;
 
-    case "leave":
+    case 3:
       window.alert("Leaving the store.");
 
       //do nothing, so function will end
@@ -143,7 +145,6 @@ var startGame = function(){
         
         if(playerInfo.health > 0){
             window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-            debugger;
             var pickedEnemyObj = enemyInfo[i];
             pickedEnemyObj.health = randomNumber(40, 60);
             fight(pickedEnemyObj);
